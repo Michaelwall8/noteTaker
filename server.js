@@ -33,5 +33,23 @@ const output_dir = path.resolve(__dirname, 'public');
 // gets the json file to the server
 let savedN = require('./db/db.json');
 
+// Generate ID
+let ID = function () {
+    return Math.random().toString(36).substr(2, 9);
+};
+
+// Write notes
+function writeN() {
+
+    // call back function at the end of the parameters 
+    fs.writeFileSync('db/db.json', JSON.stringify(savedN), function (err) {
+
+        // in case of error return error message in the console
+        if (err) {
+            return err;
+        }
+
+    });
+};
 
 
