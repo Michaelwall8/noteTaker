@@ -52,4 +52,26 @@ function writeN() {
     });
 };
 
+// -----------------------------------------------------\ Express Server Routes /----------------------------------------------------------
+
+//   ----------------\ Pages Displays /------------------
+
+// HTML Routes for the browser
+// GET is getting the data from the data base and also the HTML pages 
+// Homepage
+app.get('/', function (req, res) {
+    res.sendFile(path.join(output_dir, 'index.html'));
+});
+
+// Notes page
+app.get('/notes', function (req, res) {
+    res.sendFile(path.join(output_dir, 'notes.html'));
+});
+
+// API route 
+// Notes API 
+app.get('/api/notes', function (req, res) {
+    return res.json(savedN);
+});
+
 
