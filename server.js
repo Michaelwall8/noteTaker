@@ -74,3 +74,51 @@ app.get('/api/notes', function (req, res) {
     return res.json(savedN);
 });
 
+//  --------------\ Notes /-----------------
+
+// POST is postting all the new notes coming from the front end into our API and JSON
+// Post notes
+app.post('/api/notes', function (req, res) {
+    let note = req.body;
+
+    // id Creator
+    note.id = ID();
+    // console.log(note.id);  // =================== Print command-line, ID check
+    
+    // push note
+    savedN.push(note);
+
+    // Overwrite
+    writeN();
+
+    return res.json(savedN);
+});
+
+// Deletes notes
+app.delete("/api/notes/:id", function (req, res) {
+    // ID .params.id = (grab specific id as apose to .body which grabs everything from API)
+    let id = req.params.id; 
+    
+    // Loop saved notes array
+    for (let i = 0; i < savedN.length; i++) {         
+        if (savedN[i].id === id) {
+
+            // Delete one note from array
+            savedN.splice(i, 1);
+
+            // Overwrite
+            writeN();
+            return res.json(savedN);
+        }
+    };
+});
+
+// ------------------------------------------------------\ PORT Listener /--------------------------------------------------------------------
+app.listen(PORT, function () {
+    console.log(`\x1b[96m>>> Listening at PORT: ${PORT}  <<<\x1b[39m`);
+});
+
+// ==========================================================================================================================================
+// ===========================================================\ END /========================================================================
+// ==========================================================================================================================================
+
