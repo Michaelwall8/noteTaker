@@ -74,4 +74,3 @@ app.get('/api/notes', function (req, res) {
     return res.json(savedN);
 });
 
-
